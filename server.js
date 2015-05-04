@@ -59,6 +59,10 @@ if (settings.env === 'development') {
 }
 
 
+// start cron job
+require('./app/cron');
+
+
 // run the server
 console.log("Express server running on " + settings.port);
 app.listen(settings.port);

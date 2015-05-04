@@ -1,5 +1,5 @@
 var express = require('express');
-var scanApiController = require('./../controllers/api').scanApiController;
+var scanApiController = require('./../../controllers/api').scanApiController;
 
 
 module.exports = (function() {
