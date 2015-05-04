@@ -1,0 +1,24 @@
+@import "variables";
+@import "mixins";
+@import "base";
+
+
+html {
+	// base font-size
+	// 1rem = 16px
+	// rem = root em
+	font-size: 16px;
+	font-family: $font-family-sans-serif;
+}
+
+body {
+	// padding for navbar
+	padding-top: 70px;
+	font-family: $font-family-sans-serif;
+}
+
+input, textarea, select, textarea {
+	font-family: $font-family-sans-serif;
+
+	@include border-radius(3px);
+}
