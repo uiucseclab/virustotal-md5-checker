@@ -9,12 +9,7 @@ var ScanSchema = new Schema({
     },
     results: [{
         vendor: String,
-        result: {
-            detected: Boolean,
-            name: String,
-            version: String,
-            update: String
-        }
+        result: String
     }]
 });
 
