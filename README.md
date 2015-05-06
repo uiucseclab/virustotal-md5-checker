@@ -3,13 +3,10 @@
 ## About the Project
 This project uses [VirusTotal's Public API v2.0](https://www.virustotal.com/en/documentation/public-api/) to retrieve scan reports of md5 hashes. In particular, the [file scan report](https://www.virustotal.com/en/documentation/public-api/#getting-file-scans) endpoint is used to retrieve reports for up to 25 hashes at a time.
 
-<!---
-TODO: add more detailed explanation of purpose, implementation, and usage
--->
+[//]: # (TODO: add more detailed explanation of purpose, implementation, and usage)
 
 ## Requirements
-- Node.js
-- Npm
+- Node.js (and npm)
 - Bower
 - Grunt
 - MongoDB
