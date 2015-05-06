@@ -1,13 +1,13 @@
 var express = require('express');
-var scanRouter = require('./scan');
-var requestRouter = require('./request');
+var scanApiRouter = require('./scanApiRouter');
+var requestApiRouter = require('./requestApiRouter');
 
 
 module.exports = (function() {
     var apiRouter = express.Router();
 
-    apiRouter.use('/scans', scanRouter);
-    apiRouter.use('/requests', requestRouter);
+    apiRouter.use('/scans', scanApiRouter);
+    apiRouter.use('/requests', requestApiRouter);
 
     return apiRouter;
 })();

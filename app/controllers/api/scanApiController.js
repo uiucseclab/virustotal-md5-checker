@@ -1,4 +1,4 @@
-var scanController = require('./../scan');
+var scanController = require('./../scanController');
 
 
 exports.getScans = function(req, res, next) {

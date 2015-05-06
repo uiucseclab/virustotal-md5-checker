@@ -1,3 +1,3 @@
-exports.scanApiController = require('./scan');
-exports.requestApiController = require('./request');
-// exports.requestItemApiController = require('./requestitem');
+exports.scanApiController = require('./scanApiController');
+exports.requestApiController = require('./requestApiController');
+// exports.requestitemApiController = require('./requestitemApiController');

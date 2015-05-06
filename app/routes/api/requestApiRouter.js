@@ -5,14 +5,14 @@ var requestApiController = require('./../../controllers/api').requestApiControll
 module.exports = (function() {
     var requestRouter = express.Router();
 
-    requestRouter.route('/requests')
+    requestRouter.route('/')
         .get(requestApiController.getRequests)
         .post(requestApiController.postRequests)
         .options(requestApiController.optionsRequests);
 
-    requestRouter.route('/requests/:request_id')
+    requestRouter.route('/:request_id')
         .get(requestApiController.getRequest)
-        .put(requestApiController.putRequest)
+        // .put(requestApiController.putRequest)
         .delete(requestApiController.deleteRequest);
 
     return requestRouter;

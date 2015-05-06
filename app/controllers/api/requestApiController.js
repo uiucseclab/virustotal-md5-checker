@@ -1,4 +1,4 @@
-var requestController = require('./../request');
+var requestController = require('./../requestController');
 
 
 exports.getRequests = function(req, res, next) {

@@ -11,6 +11,7 @@ exports.getRequestItems = function(callback) {
 };
 
 exports.createRequestItem = function(data, callback) {
+    // TODO: check if scan for data.md5 already exists
     var newRequestItem = new RequestItem({
         md5: data.md5,
         done: false
