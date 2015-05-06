@@ -13,16 +13,26 @@ exports.getRequests = function(callback) {
 
 exports.createRequest = function(data, callback) {
     var items = data.items;
+    console.log(items);
     RequestItem.create(items, function(err, requestitems) {
-        if (err) callback(err, null);
-        var ids = requestitems.map(function(requestitem) { return requestitem._id; });
-        var newRequest = new Request({
-            items: ids,
-            isComplete: false
-        });
-        newRequest.save(function(err, request) {
-            callback(err, request);
-        });
+        if (err) {
+            callback(err, null);
+        } else {
+            console.log(arguments);
+            var ids = [];
+            for (var i = 1; i < arguments.length; ++i) {
+                ids.push(arguments[i]._id);
+            }
+            var newRequest = new Request({
+                items: ids,
+                isComplete: false
+            });
+            newRequest.save(function(err, request) {
+                var data = request;
+                data.requestitems = requestitems;
+                callback(err, data);
+            });
+        }
     });
 };
 
@@ -51,6 +61,14 @@ exports.deleteRequest = function(id, callback) {
         .findById(id)
         .remove()
         .exec(function(err, request) {
-            callback(err, request);
+            var items = request.items;
+            RequestItem
+                .find({ _id : { $in: items } })
+                .remove()
+                .exec(function(err, requestitems) {
+                    var data = request;
+                    data.removedItems = requestitems;
+                    callback(err, data);
+                });
         });
 };

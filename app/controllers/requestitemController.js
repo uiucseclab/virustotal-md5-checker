@@ -5,8 +5,8 @@ var RequestItem = models.RequestItem;
 exports.getRequestItems = function(callback) {
     RequestItem
         .find()
-        .exec(function(err, requests) {
-            callback(err, requests);
+        .exec(function(err, requestitems) {
+            callback(err, requestitems);
         });
 };
 
@@ -16,16 +16,16 @@ exports.createRequestItem = function(data, callback) {
         md5: data.md5,
         done: false
     });
-    newRequestItem.save(function(err, request) {
-        callback(err, request);
+    newRequestItem.save(function(err, requestitem) {
+        callback(err, requestitem);
     });
 };
 
 exports.getRequestItem = function(id, callback) {
     RequestItem
         .findById(id)
-        .exec(function(err, request) {
-            callback(err, request);
+        .exec(function(err, requestitem) {
+            callback(err, requestitem);
         });
 };
 
@@ -36,8 +36,8 @@ exports.updateRequestItem = function(id, data, callback) {
             md5: data.md5,
             done: data.done
         })
-        .exec(function(err, request) {
-            callback(err, request);
+        .exec(function(err, requestitem) {
+            callback(err, requestitem);
         });
 };
 
@@ -45,7 +45,7 @@ exports.deleteRequestItem = function(id, callback) {
     RequestItem
         .findById(id)
         .remove()
-        .exec(function(err, request) {
-            callback(err, request);
+        .exec(function(err, requestitem) {
+            callback(err, requestitem);
         });
 };
