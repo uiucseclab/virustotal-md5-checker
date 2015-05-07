@@ -24,18 +24,18 @@ exports.createRequest = function(data, callback) {
             var scanMd5s = scans.filter(function(scan) { return scan.md5; });
             var newItems = items.filter(function(item) { if (scanMd5s.indexOf(item.md5) < 0) return item; });
             var newScans = newItems.filter(function(item) { return { md5: item.md5, results: [] }; });
-            Scan.create(newScans, function(err, savedScans) {
+            Scan.create(newScans, function(err) {
                 if (err) {
                     callback(err, null);
                 } else {
+                    var scans = arguments;
                     RequestItem.create(newItems, function(err, requestitems) {
                         if (err) {
                             callback(err, null);
                         } else {
-                            console.log(arguments);
                             var ids = [];
-                            for (var i = 1; i < arguments.length; ++i) {
-                                ids.push(arguments[i]._id);
+                            for (var i = 1; i < scans.length; ++i) {
+                                ids.push(scans[i]._id);
                             }
                             var newRequest = new Request({
                                 items: ids
