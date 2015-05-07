@@ -49,6 +49,8 @@ var job = new CronJob({
                                     vendor: 'Not in VirusTotal database.',
                                     result: ''
                                 }];
+                                var positives = 0;
+                                var total = 0;
 
                                 if (res.body.response_code === 1) {
                                     results = (function() {
@@ -62,26 +64,31 @@ var job = new CronJob({
                                         }
                                         return ret;
                                     })();
+                                    positives = res.body.positives;
+                                    total = res.body.total;
                                 }
 
-                                var newScan = {
-                                    md5: requestitem.md5,
-                                    positives: res.body.positives,
-                                    total: res.body.total,
+                                var newData = {
+                                    positives: positives,
+                                    total: total,
                                     results: results
                                 };
 
-                                Scan.create(newScan, function(err, scan) {
-                                    if (err) {
-                                        console.log('Error creating scan');
-                                    } else {
-                                        console.log('Successfully created scan');
-                                        requestitem.remove(function(err) {
-                                            if (err) console.log('Error removing requestitem');
-                                            else console.log('Successfully removed requestitem');
-                                        });
-                                    }
-                                });
+                                Scan
+                                    .findOne({ md5: requestitem.md5 })
+                                    .update(newData, function(err, scan) {
+                                        if (err) {
+                                            console.log('Error updating scan');
+                                            console.log(err);
+                                        } else {
+                                            console.log('Successfully updated scan');
+                                            requestitem.remove(function(err) {
+                                                if (err) console.log('Error removing requestitem');
+                                                else console.log('Successfully removed requestitem');
+                                            });
+                                        }
+                                    });
+                                // Scan query
                             }
                         });
                     // httpRequest
