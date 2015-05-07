@@ -2,11 +2,15 @@ var models = require('./../models');
 var Scan = models.Scan;
 
 
-exports.getScans = function(callback) {
+exports.getScans = function(params, callback) {
     Scan
-        .find()
+        .find(params.where)
+        .select(params.select)
+        .sort(params.sort)
+        .skip(params.skip)
+        .limit(params.limit)
         .exec(function(err, scans) {
-            callback(err, scans);
+            callback(err, params.count ? scans.length : scans);
         });
 };
 

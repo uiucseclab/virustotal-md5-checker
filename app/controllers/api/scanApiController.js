@@ -2,7 +2,21 @@ var scanController = require('./../scanController');
 
 
 exports.getScans = function(req, res, next) {
-    scanController.getScans(function(err, scans) {
+    var where  = req.query.where  ? JSON.parse(req.query.where)  : {};
+    var sort   = req.query.sort   ? JSON.parse(req.query.sort)   : {};
+    var select = req.query.select ? JSON.parse(req.query.select) : {};
+    var skip   = req.query.skip   ? parseInt(req.query.skip)     : 0;
+    var limit  = req.query.limit  ? parseInt(req.query.limit)    : 0;
+    var count  = req.query.count  ? req.query.count === 'true'   : false;
+    var params = {
+        where: where,
+        sort: sort,
+        select: select,
+        skip: skip,
+        limit: limit,
+        count: count
+    };
+    scanController.getScans(params, function(err, scans) {
         if (err) {
             res.status(500).json({
                 message: 'Error encountered while retrieving scans',
