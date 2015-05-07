@@ -1,0 +1,26 @@
+<div>
+    <h1>Request Page</h1>
+
+    <div data-ng-show="!request && error">
+        <div>Could not find request</div>
+    </div>
+
+    <div data-ng-show="request">
+        <table>
+            <thead>
+                <tr>
+                    <td>md5 Hash</td>
+                    <td>Positives</td>
+                    <td>Details</td>
+                </tr>
+            </thead>
+            <tbody>
+                <tr data-ng-repeat="scan in request.scans">
+                    <td data-ng-bind="scan.md5"></td>
+                    <td data-ng-bind="scan.positives"></td>
+                    <td><a data-ng-href="#/scan/{{scan._id}}" data-ng-show="scan.results.length">View details</a><span data-ng-hide="scan.results.length">Request pending</span></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

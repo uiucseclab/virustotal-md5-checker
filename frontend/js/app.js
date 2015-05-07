@@ -14,6 +14,14 @@ app.config([
             templateUrl: 'partials/home.html',
             controller: 'HomepageController'
         })
+        .when('/request/:requestId', {
+            templateUrl: 'partials/request.html',
+            controller: 'RequestController'
+        })
+        .when('/scan/:scanId', {
+            templateUrl: 'partials/scan.html',
+            controller: 'ScanController'
+        })
         .otherwise({
             redirectTo: '/'
         });

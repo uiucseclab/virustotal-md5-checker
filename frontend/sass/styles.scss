@@ -22,3 +22,18 @@ input, textarea, select, textarea {
 
 	@include border-radius(3px);
 }
+
+.form-input-wrapper {
+	width: 100%;
+
+	textarea {
+		width: 100%;
+	}	
+}
+
+#hash-textarea {
+	display: block;
+	height: 200px;
+	margin: 20px 0;
+	resize: none;
+}

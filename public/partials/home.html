@@ -1,3 +1,16 @@
 <div>
-    <h1>Index page</h1>
+    <h1>Check md5 Hashes</h1>
+    <form data-ng-submit="submitForm()">
+        <div>
+            <label>Input hashes here (separated by line, comma, semicolon, or space):</label>
+            <div class="form-input-wrapper">
+                <textarea id="hash-textarea" data-ng-model="md5s"></textarea>
+            </div>
+        </div>
+        <button type="submit">Submit</button>
+    </form>
+    <div data-ng-show="message">
+        <div data-ng-bind="message"></div>
+        <a data-ng-href="#/request/{{request._id}}" data-ng-show="request">View your request.</a>
+    </div>
 </div>
