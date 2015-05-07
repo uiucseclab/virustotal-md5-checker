@@ -10,10 +10,6 @@ var RequestSchema = new Schema({
     dateAdded: {
         type: Date,
         default: Date.now
-    },
-    isComplete: {
-        type: Boolean,
-        default: false
     }
 });
 

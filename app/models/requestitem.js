@@ -7,9 +7,13 @@ var RequestItemSchema = new Schema({
         type: String,
         required: true
     },
-    done: {
-        type: Boolean,
-        default: false
+    // done: {
+    //     type: Boolean,
+    //     default: false
+    // },
+    dateAdded: {
+        type: Date,
+        default: Date.now
     }
 });
 

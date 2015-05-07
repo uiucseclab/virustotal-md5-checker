@@ -7,6 +7,8 @@ var ScanSchema = new Schema({
         type: String,
         required: true
     },
+    positives: Number,
+    total: Number,
     results: [{
         vendor: String,
         result: String
