@@ -47,7 +47,7 @@ appControllers.controller('RequestController', [
     function($scope, $routeParams, Requests, Scans) {
         var requestId = $routeParams.requestId;
 
-        $scope.request = '';
+        $scope.request = null;
         $scope.error = false;
 
         Requests.getOne(requestId).success(function(data) {
@@ -58,10 +58,12 @@ appControllers.controller('RequestController', [
                 where: { _id: { $in: items } }
             }).success(function(data) {
                 console.log('Loaded scans');
+                $scope.error = false;
                 $scope.request = request;
                 $scope.request.scans = data.data;
             }).error(function(data) {
                 console.log('Failed to load scans');
+                $scope.error = true;
             });
         }).error(function(data) {
             console.log('Could not find request');
@@ -76,5 +78,17 @@ appControllers.controller('ScanController', [
     'Scans',
     function($scope, $routeParams, Scans) {
         var scanId = $routeParams.scanId;
+
+        $scope.scan = null;
+        $scope.error = false;
+
+        Scans.getOne(scanId).success(function(data) {
+            console.log('Loaded scan');
+            $scope.error = false;
+            $scope.scan = data.data;
+        }).error(function(data) {
+            console.log('Could not find scan');
+            $scope.error = true;
+        });
     }
 ]);

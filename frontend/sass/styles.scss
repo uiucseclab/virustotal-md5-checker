@@ -23,6 +23,11 @@ input, textarea, select, textarea {
 	@include border-radius(3px);
 }
 
+.page-subtitle {
+	margin: 10px 0;
+	font-size: 24px;
+}
+
 .form-input-wrapper {
 	width: 100%;
 
@@ -36,4 +41,20 @@ input, textarea, select, textarea {
 	height: 200px;
 	margin: 20px 0;
 	resize: none;
+}
+
+table {
+	width: 100%;
+	
+	td {
+		padding: 20px;
+	}
+}
+
+.scan-good {
+	color: $scan-good;
+}
+
+.scan-bad {
+	color: $scan-bad;
 }
