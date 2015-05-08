@@ -1,9 +1,14 @@
 # Final Project for CS460
 
 ## About the Project
-This project uses [VirusTotal's Public API v2.0](https://www.virustotal.com/en/documentation/public-api/) to retrieve scan reports of md5 hashes. In particular, the [file scan report](https://www.virustotal.com/en/documentation/public-api/#getting-file-scans) endpoint is used to retrieve reports for up to 4 hashes at a time.
+This project uses [VirusTotal's Public API v2.0](https://www.virustotal.com/en/documentation/public-api/) to retrieve scan reports of MD5 hashes. In particular, the [file scan report](https://www.virustotal.com/en/documentation/public-api/#getting-file-scans) endpoint is used to retrieve reports for up to 4 hashes per minute.
 
-[//]: # (TODO: add more detailed explanation of purpose, implementation, and usage)
+## How it Works
+Upon submitting a number of MD5 hashes, `Scan` and `RequestItem` objects are created for each one. The `Scan` will contain the results of the VirusTotal API call, while the `RequestItem` objects are used to determine the order in which requests are made. A `Request` object is created as well, and it contains an array of ids of `Scan` objects associated with the submitted hashes.
+
+A cron job runs every 16 seconds (to avoid going over the limit of 4 resources/minute) that picks the oldest `RequestItem` and sends the MD5 hash stored in it to VirusTotal. The associated `Scan` object is then updated with the response from the API.
+
+In this way, `Request`s can be created and viewed without having all of the VirusTotal scan reports in the database. It is also possible to check for existing `Scan` objects to avoid making unnecessary API calls. 
 
 ## Requirements
 - Node.js (and npm)
