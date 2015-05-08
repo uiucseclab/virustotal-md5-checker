@@ -17,8 +17,14 @@
             <tbody>
                 <tr data-ng-repeat="scan in request.scans">
                     <td data-ng-bind="scan.md5"></td>
-                    <td data-ng-bind="scan.positives"></td>
-                    <td><a data-ng-href="#/scan/{{scan._id}}" data-ng-show="scan.results.length">View details</a><span data-ng-hide="scan.results.length">Request pending</span></td>
+                    <td>
+                        <span data-ng-show="scan.exists && scan.done"><span data-ng-bind="scan.positives"></span>/<span data-ng-bind="scan.total"></span></span>
+                    </td>
+                    <td>
+                        <a data-ng-href="#/scan/{{scan._id}}" data-ng-show="scan.exists && scan.done">View details</a>
+                        <span data-ng-show="scan.exists && !scan.done">Request pending</span>
+                        <span data-ng-show="!scan.exists && scan.done">Not in VirusTotal DB</span>
+                    </td>
                 </tr>
             </tbody>
         </table>

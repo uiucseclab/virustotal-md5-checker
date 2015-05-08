@@ -45,12 +45,10 @@ var job = new CronJob({
                                     return;
                                 }
 
-                                var results = [{
-                                    vendor: 'Not in VirusTotal database.',
-                                    result: ''
-                                }];
+                                var results = [];
                                 var positives = 0;
                                 var total = 0;
+                                var exists = false;
 
                                 if (res.body.response_code === 1) {
                                     results = (function() {
@@ -66,11 +64,14 @@ var job = new CronJob({
                                     })();
                                     positives = res.body.positives;
                                     total = res.body.total;
+                                    exists = true;
                                 }
 
                                 var newData = {
                                     positives: positives,
                                     total: total,
+                                    exists: exists,
+                                    done: true,
                                     results: results
                                 };
 

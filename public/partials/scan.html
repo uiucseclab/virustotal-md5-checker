@@ -1,3 +1,36 @@
 <div>
     <h1>Scan Page</h1>
+
+    <div data-ng-show="!scan && error">
+        <div>Could not find scan</div>
+    </div>
+
+    <div data-ng-show="scan">
+        <div class="page-subtitle">md5: <span data-ng-bind="scan.md5"></span></div>
+        <div data-ng-hide="scan.exists">
+            <div>Not in virustotal database</div>
+        </div>
+        <div data-ng-show="scan.exists && !scan.done">
+            <div>Request pending</div>
+        </div>
+        <div data-ng-show="scan.exists && scan.done">
+            <div>
+                <span data-ng-bind="scan.positives"></span>/<span data-ng-bind="scan.total"></span>
+            </div>
+            <table>
+                <thead>
+                    <tr>
+                        <td>Vendor</td>
+                        <td>Result</td>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr data-ng-repeat="result in scan.results">
+                        <td data-ng-bind="result.vendor"></td>
+                        <td><span class="scan-bad" data-ng-bind="result.result" data-ng-show="result.result"></span><span class="scan-good" data-ng-hide="result.result">None</span></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
 </div>

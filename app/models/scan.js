@@ -9,6 +9,14 @@ var ScanSchema = new Schema({
     },
     positives: Number,
     total: Number,
+    exists: {
+        type: Boolean,
+        default: true
+    },
+    done: {
+        type: Boolean,
+        default: false
+    },
     results: [{
         vendor: String,
         result: String
