@@ -13,7 +13,7 @@ exports.getRequests = function(callback) {
 };
 
 exports.createRequest = function(data, callback) {
-    var items = data.items;
+    var items = data.items.filter(function(item) { return item.md5.match(/[a-fA-F0-9]{32}/); });
 
     // check if scans for the items already exists
     var md5s = [];
@@ -33,7 +33,6 @@ exports.createRequest = function(data, callback) {
 
             // get items that have md5s not in array of existing scans
             var newItems = items.filter(function(item) { return scanMd5s.indexOf(item.md5) < 0; });
-            console.log(newItems);
 
             // create new scan and requestitem objects and remove duplicates
             var temp = {};
@@ -46,7 +45,6 @@ exports.createRequest = function(data, callback) {
                 newScans.push({ md5: md5, results: [] });
                 newRequestItems.push({ md5: md5 });
             }
-            console.log(newScans);
 
             // create the new scans
             Scan.create(newScans, function(err) {
@@ -62,8 +60,6 @@ exports.createRequest = function(data, callback) {
                         newScanIds.push(scans[i]._id);
                         newScanMd5s.push(scans[i].md5);
                     }
-                    console.log(newScanIds);
-                    console.log(newScanMd5s)
 
                     // create new requestitems for new md5s
                     RequestItem.create(newRequestItems, function(err, requestitems) {
@@ -78,7 +74,6 @@ exports.createRequest = function(data, callback) {
                                 var newScanIndex = newScanMd5s.indexOf(md5s[i]);
                                 ids.push(scanIndex > -1 ? scanIds[scanIndex] : newScanIds[newScanIndex]);
                             }
-                            console.log(ids);
 
                             var newRequest = new Request({
                                 items: ids
