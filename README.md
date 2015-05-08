@@ -41,6 +41,8 @@ source ~/.profile
 ## Running the Project
 First, set up the app configuration. Find out how in [`app/config/default`](app/config/default).
 
+Edit the `baseUrl` used for making API calls in `frontend/js/settings.js`. If you are running this locally, you can skip this step.
+
 Use the following commands to get this up and running:
 ```bash
 npm install # installs backend dependencies
