@@ -48,7 +48,7 @@ exports.postScans = function(req, res, next) {
 };
 
 exports.optionsScans = function(req, res, next) {
-    res.status(200).send();
+    res.sendStatus(200);
 };
 
 exports.getScan = function(req, res, next) {

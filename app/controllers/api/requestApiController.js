@@ -34,7 +34,7 @@ exports.postRequests = function(req, res, next) {
 };
 
 exports.optionsRequests = function(req, res, next) {
-    res.status(200).send();
+    res.sendStatus(200);
 };
 
 exports.getRequest = function(req, res, next) {
