@@ -3,6 +3,8 @@
 ## About the Project
 This project uses [VirusTotal's Public API v2.0](https://www.virustotal.com/en/documentation/public-api/) to retrieve scan reports of MD5 hashes. In particular, the [file scan report](https://www.virustotal.com/en/documentation/public-api/#getting-file-scans) endpoint is used to retrieve reports for up to 4 hashes per minute.
 
+Live version hosted on DigitalOcean [here](http://45.55.177.152:3000/).
+
 ## How it Works
 Upon submitting a number of MD5 hashes, `Scan` and `RequestItem` objects are created for each one. The `Scan` will contain the results of the VirusTotal API call, while the `RequestItem` objects are used to determine the order in which requests are made. A `Request` object is created as well, and it contains an array of ids of `Scan` objects associated with the submitted hashes.
 
