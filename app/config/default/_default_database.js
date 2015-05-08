@@ -1,7 +1,7 @@
 var mongoose = require('mongoose');
 
 module.exports = {
-    databaseName: '',
+    databaseName: 'test',
     databaseHost: process.argv[3] || process.env.NODE_DB || 'mongodb://localhost:27017/'
 };
 
